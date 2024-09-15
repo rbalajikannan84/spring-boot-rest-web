@@ -31,19 +31,19 @@ class CustomerRepositoryTest {
     @BeforeEach
     void setUp() {
         Address address = Address.builder()
-                .houseNumber("123")
-                .street("Telok blangah")
-                .city("Singapore")
-                .build();
+                                 .houseNumber("123")
+                                 .street("Telok blangah")
+                                 .city("Singapore")
+                                 .build();
 
         addressList.add(address);
 
         customer = Customer.builder()
-                .name("test")
-                .email("test@test.com")
-                .gender("Male")
-                .address(addressList)
-                .build();
+                           .name("test")
+                           .email("test@test.com")
+                           .gender("Male")
+                           .address(addressList)
+                           .build();
 
         customerList.add(customer);
     }

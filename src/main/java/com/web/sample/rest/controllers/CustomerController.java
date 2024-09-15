@@ -2,10 +2,8 @@ package com.web.sample.rest.controllers;
 
 import com.web.sample.rest.entity.Customer;
 import com.web.sample.rest.error.CustomerNotFoundException;
-import com.web.sample.rest.repositories.CustomerRepository;
 import com.web.sample.rest.services.CustomerService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

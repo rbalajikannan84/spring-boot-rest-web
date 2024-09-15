@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CustomerController.class)
@@ -78,5 +78,57 @@ public class CustomerControllerTest {
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(customer)))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void updateCustomerReturnsStatusOk() throws Exception {
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setName("Test");
+        customer.setEmail("test@example.com");
+        customer.setGender("M");
+
+        when(customerService.update(1L, customer)).thenReturn(customer);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        mockMvc.perform(put("/customer/1")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(customer)))
+                        .andExpect(status().isOk());
+    }
+
+    @Test
+    public void deleteCustomerReturnsStatusOk() throws Exception {
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setName("Test");
+        customer.setEmail("test@example.com");
+        customer.setGender("M");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        mockMvc.perform(delete("/customer/1")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(customer)))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getCustomerByIdReturnsStatusOk() throws Exception {
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setName("Test");
+        customer.setEmail("test@example.com");
+        customer.setGender("M");
+
+        when(customerService.findById(1L)).thenReturn(customer);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        mockMvc.perform(get("/customer/1")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(customer)))
+                .andExpect(status().isOk());
     }
 }
